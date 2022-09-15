@@ -14,4 +14,5 @@ entity SupplierContracts : managed, cuid {
     date        :   DateTime;
     startdate   :   DateTime;
     enddate     :   DateTime;
+    supplierID  :   String;
 }

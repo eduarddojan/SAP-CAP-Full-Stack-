@@ -35,7 +35,7 @@ annotate service.SupplierContracts with @(
         Data : [
             {
                 $Type : 'UI.DataField',
-                Label : 'identifier',
+                Label : 'ID',
                 Value : identifier,
             },
             {
