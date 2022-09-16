@@ -69,8 +69,8 @@
         "credentials": {
           "url": "https://my338929.sapbydesign.com/sap/byd/odata/cust/v1/querysuppliers",
           "authentication": "BasicAuthentication",
-          "username": "USER",
-          "password": "password"
+          "username": "EDU.BU",
+          "password": "25SapDev%&"
         }
       }
     }

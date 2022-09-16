@@ -11,9 +11,10 @@ service SupplierContracts {
             *,
             toSupplier
         }
-        actions {
+        /*actions {
 
-        }
+        }*/
+    
 }
 
 // Remote ByD Services
@@ -22,11 +23,11 @@ using { byd_suppliers as RemoteSupplier } from './external/byd_suppliers';
 
 extend service SupplierContracts with {
     entity Suppliers as projection on RemoteSupplier.SupplierCollection {
-        key ObjectID as ID,
-        InternalID as supplierID,
-        LifeCycleStatusCode as status,
-        FirstLineName as firstLineName,
-        SecondLineName as secondLineName,
-        SortingFormattedName as formattedName
+        @readonly key ObjectID as ID,
+        @readonly InternalID as supplierID,
+        @readonly LifeCycleStatusCode as status,
+        @readonly FirstLineName as firstLineName,
+        @readonly SecondLineName as secondLineName,
+        @readonly SortingFormattedName as formattedName
     }
 };

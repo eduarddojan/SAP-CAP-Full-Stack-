@@ -7,6 +7,7 @@ using {
     Currency
 } from '@sap/cds/common';
 
+
 // Supplier Contract
 entity SupplierContracts : managed, cuid {
     identifier  :   String;
@@ -14,5 +15,6 @@ entity SupplierContracts : managed, cuid {
     date        :   DateTime;
     startdate   :   DateTime;
     enddate     :   DateTime;
-    supplierID  :   String;
+    supplierID  :   String; 
 }
+
