@@ -1,0 +1,5 @@
+code;name;descr
+0;AutoOneYear;Automatic renewal after one year, if not cancelled
+1;Auto;Automatic renewal, if not cancelled
+2;ExtensionByThree;Extension by 3 further months each time, unless cancelled
+4;Quote8;Quote 8 weeks before end, with automatic acceptance

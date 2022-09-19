@@ -1,0 +1,5 @@
+code;name;descr
+0;1Month;1 month before end of quarter
+1;1MonthEnd;1 month to end of the contract duration
+2;2MonthEnd;2 months to the end of a calendar month
+4;3Months;3 months to the end of the calendar year

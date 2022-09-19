@@ -31,6 +31,7 @@ modules:
           name: srv-api # must be used in xs-app.json as well
           url: ~{srv-url}
           forwardAuthToken: true
+          strictSSL: true
       - name: supplier-contract-uaa
       - name: supplier-contract-destination-service
 resources:

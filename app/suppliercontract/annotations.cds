@@ -98,6 +98,26 @@ annotate service.SupplierContracts with @(
             
         ],
     },
+    UI.FieldGroup #Renewal : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'Renewal Rule',
+                Value : renewalRuleCode_code
+            } 
+        ],
+    },
+    UI.FieldGroup #Cancellation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'Cancellation Rule',
+                Value : cancellationAgreementCode_code
+            } 
+        ],
+    },
     UI.Facets : [
         {
             $Type : 'UI.ReferenceFacet',
@@ -110,6 +130,24 @@ annotate service.SupplierContracts with @(
             ID : 'SupplerInformation',
             Label : 'Supplier Information',
             Target : '@UI.FieldGroup#SupplerInformation',
+        },
+        {
+            $Type : 'UI.CollectionFacet',
+            ID : 'RenewalCanellation',
+            Label : 'Renewal and Cancellation',
+            Facets : [{
+                $Type  : 'UI.ReferenceFacet',
+                Target : ![@UI.FieldGroup#Renewal],
+                ID     : 'Renewal',
+                Label : 'Renewal Agreement'
+                },
+                {
+                    $Type  : 'UI.ReferenceFacet',
+                    Target : ![@UI.FieldGroup#Cancellation],
+                    ID     : 'Cancellation',
+                    Label : 'Cancellation Agreement'
+                }
+            ]
         },
     ]
 );
@@ -146,6 +184,40 @@ annotate service.SupplierContracts with {
                 ]
             },
             Text : statusCode.descr,
+            TextArrangement : #TextOnly 
+        }
+    );
+    renewalRuleCode @ (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'SupplierContractRenewalRuleCodes',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : renewalRuleCode_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : renewalRuleCode.descr,
+            TextArrangement : #TextOnly 
+        }
+    );
+    cancellationAgreementCode @ (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'SupplierContractCancellationAgreementCodes',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : cancellationAgreementCode_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : cancellationAgreementCode.descr,
             TextArrangement : #TextOnly 
         }
     )

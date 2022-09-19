@@ -5,7 +5,7 @@
       {
         "source": "^/webapp/(.*)$",
         "target": "$1",
-        "localDir": "webapp/"
+        "localDir": "resources"
       },
       {
           "source": "^(.*)$",
