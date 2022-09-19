@@ -15,6 +15,15 @@ entity SupplierContracts : managed, cuid {
     date        :   DateTime;
     startdate   :   DateTime;
     enddate     :   DateTime;
-    supplierID  :   String; 
+    supplierID  :   String;
+    statusCode  :   Association to one SupplierContractStatusCodes; 
 }
 
+// Supplier contract status codes
+entity SupplierContractStatusCodes : sap.common.CodeList {
+        @Common.Text : {
+            $value                 : descr,
+            ![@UI.TextArrangement] : #TextOnly
+        }
+    key code : Integer default 0
+}

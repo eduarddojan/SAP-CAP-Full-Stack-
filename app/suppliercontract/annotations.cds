@@ -18,6 +18,11 @@ annotate service.SupplierContracts with @(
             Value : toSupplier.supplierID,
         },
         {
+            $Type       : 'UI.DataField',
+            Value       : statusCode.descr,
+            Label       : 'Status'
+        },
+        {
             $Type : 'UI.DataField',
             Label : 'Date',
             Value : date,
@@ -48,6 +53,11 @@ annotate service.SupplierContracts with @(
                 $Type : 'UI.DataField',
                 Label : 'Description',
                 Value : description,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : statusCode_code,
+                Label : 'Status'
             },
             {
                 $Type : 'UI.DataField',
@@ -122,6 +132,23 @@ annotate service.SupplierContracts with {
             ]
         }
     );
+    statusCode @ (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'SupplierContractStatusCodes',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : statusCode_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : statusCode.descr,
+            TextArrangement : #TextOnly 
+        }
+    )
 }
 
 annotate service.Suppliers with {
