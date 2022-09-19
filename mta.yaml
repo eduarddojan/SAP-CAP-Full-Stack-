@@ -17,39 +17,13 @@ modules:
     requires:
       - name: supplier-contract
       - name: supplier-contract-uaa
-  - name: supplier-contract-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: supplier-contract-uaa
       - name: supplier-contract-destination-service
-      - name: supplier-contract-repo-host
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources
-      requires:
-        - artifacts:
-            - suppliercontract.zip
-          name: suppliercontract
-          target-path: resources/
-  - name: suppliercontract
-    type: html5
-    path: app/suppliercontract
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-
+  
   - name: supplier-contract
     type: approuter.nodejs
-    path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
+    path: app/suppliercontract # from cds.env.folders. Consider also cds.env.build.target -> gen/app
     parameters:
       keep-existing-routes: true
-      disk-quota: 256M
     requires:
       - name: srv-api
         group: destinations
@@ -60,27 +34,9 @@ modules:
       - name: supplier-contract-uaa
       - name: supplier-contract-destination-service
 resources:
-  - name: supplier-contract-repo-host
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-name: supplier-contract-html5-srv
-      service-plan: app-host
   - name: supplier-contract-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
-      config:
-        HTML5Runtime_enabled: false
-        init_data:
-          instance:
-            destinations:
-              - Authentication: NoAuthentication
-                Name: ui5
-                ProxyType: Internet
-                Type: HTTP
-                URL: https://ui5.sap.com
-            existing_destinations_policy: update
-        version: 1.0.0
       service: destination
       service-name: supplier-contract-destination-service
       service-plan: lite
@@ -96,13 +52,4 @@ resources:
       path: ./xs-security.json
       service: xsuaa
       service-name: supplier-contract-uaa
-      service-plan: application
-
-parameters:
-  deploy_mode: html5-repo
-  enable-parallel-deployments: true
-build-parameters:
-  before-all:
-    - builder: custom
-      commands:
-        - npx -p @sap/cds-dk cds build --production
+      service-plan: application      
