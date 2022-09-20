@@ -71,10 +71,14 @@ annotate service.SupplierContracts with @(
             },
             {
                 $Type : 'UI.DataField',
+                Label : 'Currency',
+                Value : currency_code,
+            },
+            {
+                $Type : 'UI.DataField',
                 Label : 'End Date',
                 Value : enddate,
             },
-            
         ],
     },
     UI.FieldGroup #SupplerInformation : {
@@ -149,6 +153,16 @@ annotate service.SupplierContracts with @(
                 }
             ]
         },
+        {
+            $Type  : 'UI.CollectionFacet',
+            Label  : 'Items',
+            ID     : 'Items',
+            Facets : [{
+                $Type  : 'UI.ReferenceFacet',
+                Target : 'Items/@UI.LineItem',
+                ID     : 'Items'
+            }],
+        }
     ]
 );
 
@@ -220,7 +234,24 @@ annotate service.SupplierContracts with {
             Text : cancellationAgreementCode.descr,
             TextArrangement : #TextOnly 
         }
-    )
+    );
+    currency_code @ (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'Currencies',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : currency_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : currency_code.descr,
+            TextArrangement : #TextOnly 
+        }
+    );
 }
 
 annotate service.Suppliers with {
@@ -232,3 +263,18 @@ annotate service.Suppliers with {
 }
 
 annotate service.SupplierContracts with @Capabilities.SearchRestrictions.Searchable : false;
+
+annotate service.Items with @(UI : {
+    LineItem : [
+        {
+            $Type             : 'UI.DataField',
+            Value             : identifer,
+            Label             : 'ID',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : description,
+            Label             : 'Description',
+        }
+    ]
+});

@@ -1,7 +1,9 @@
 using { bc.hack2build.suppliercontract as armodels } from '../db/entity_models';
 using sap from '@sap/cds/common';
 
+
 service SupplierContracts {
+    
     @odata.draft.enabled
     entity SupplierContracts as select from armodels.SupplierContracts
         mixin {
@@ -10,15 +12,17 @@ service SupplierContracts {
         into {
             *,
             toSupplier
-        }
+        };
         /*actions {
 
         }*/
-    
+
+    entity Items as projection on armodels.Items;
 }
 
-// Remote ByD Services
 
+
+// Remote ByD Services
 using { byd_suppliers as RemoteSupplier } from './external/byd_suppliers';
 
 extend service SupplierContracts with {
