@@ -31,6 +31,11 @@ entity SupplierContracts : managed, cuid {
 
     // Items
     Items                       :   Composition of many Items on Items.parent = $self;
+
+    // Recurrence Pattern
+    recurrenceDay               :   Integer;
+    recurrencePattern           :   Association to one TimeMeasurement;
+    nextExecutionDate           :   DateTime;    
 }
 
 entity Items : managed, cuid {
@@ -81,6 +86,15 @@ entity SupplierContractCancellationAgreementCodes : sap.common.CodeList {
 
 //  UoM
 entity UnitOfMeasurement : sap.common.CodeList {
+        @Common.Text : {
+            $value                 : descr,
+            ![@UI.TextArrangement] : #TextOnly
+        }
+    key code : Integer default 0
+}
+
+//  Time Measurement
+entity TimeMeasurement : sap.common.CodeList {
         @Common.Text : {
             $value                 : descr,
             ![@UI.TextArrangement] : #TextOnly

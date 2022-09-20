@@ -18,7 +18,7 @@ annotate service.SupplierContracts with @(
         {
             $Type : 'UI.DataField',
             Label : 'Supplier',
-            Value : toSupplier.supplierID,
+            Value : toSupplier.supplierID
         },
         {
             $Type       : 'UI.DataField',
@@ -158,7 +158,17 @@ annotate service.SupplierContracts with @(
                 $Type : 'UI.DataField',
                 Label : 'Renewal Rule',
                 Value : renewalRuleCode_code
-            } 
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Note',
+                Value : renewalNote
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Renewal Reminder in',
+                Value : renewalReminderCount
+            }   
         ],
     },
     UI.FieldGroup #Cancellation : {
@@ -168,7 +178,37 @@ annotate service.SupplierContracts with @(
                 $Type : 'UI.DataField',
                 Label : 'Cancellation Rule',
                 Value : cancellationAgreementCode_code
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Note',
+                Value : cancellationNote
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Cancellation Reminder in',
+                Value : cancellationReminderCount
             } 
+        ],
+    },
+    UI.FieldGroup #Recurrence : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'Recurrence on day',
+                Value : recurrenceDay 
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Recurrence Pattern',
+                Value : recurrencePattern_code 
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Next Execution',
+                Value : nextExecutionDate 
+            },
         ],
     },
     UI.Facets : [
@@ -210,8 +250,14 @@ annotate service.SupplierContracts with @(
                 $Type  : 'UI.ReferenceFacet',
                 Target : 'Items/@UI.LineItem',
                 ID     : 'Items'
-            }],
-        }
+            },],
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'RecurrencePattern',
+            Label : 'Recurring Invoicing',
+            Target : '@UI.FieldGroup#Recurrence',
+        },
     ]
 );
 
@@ -231,6 +277,16 @@ annotate service.Items with @(UI : {
             $Type             : 'UI.DataField',
             Value             : productCategory,
             Label             : 'Product Category',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : toProductCategory.prdouctCategoryID,
+            @UI.Hidden        : true
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : toProductCategory.description,
+            @UI.Hidden        : true
         },
         {
             $Type             : 'UI.DataField',
@@ -350,6 +406,23 @@ annotate service.SupplierContracts with {
             Text : currency.name
         }
     );
+    recurrencePattern @ (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'TimeMeasurement',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : recurrencePattern_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : recurrencePattern.descr,
+            TextArrangement : #TextOnly 
+        }
+    );
 }
 
 // Value help on items
@@ -415,12 +488,10 @@ annotate service.Items with {
                     ValueListProperty: 'prdouctCategoryID'
                 },
                 { $Type: 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'description'
+                    ValueListProperty: 'prdouctCategoryID'
                 }
             ]
-        },
-        Common.Text : productCategory.description,
-        Common.TextArrangement : #TextOnly 
+        }
     )    
 }
 
