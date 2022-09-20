@@ -9,6 +9,11 @@ module.exports = cds.service.impl(async function() {
         return suppliers.run(req.query);
     });
 
+    this.on('READ', 'ProductCategories', async req => {
+        const prod_categories = await cds.connect.to('byd_product_categories');
+        return prod_categories.run(req.query);
+    });
+
     // Risks?$expand=supplier
     this.on("READ", 'SupplierContracts', async (req, next) => {
 

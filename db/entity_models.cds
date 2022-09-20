@@ -50,6 +50,8 @@ entity Items : managed, cuid {
     //taxCode             :    
 }
 
+
+
 // Supplier contract status codes
 entity SupplierContractStatusCodes : sap.common.CodeList {
         @Common.Text : {

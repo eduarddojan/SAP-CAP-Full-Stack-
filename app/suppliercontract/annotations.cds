@@ -1,6 +1,9 @@
 using SupplierContracts as service from '../../srv/service-models';
 
 annotate service.SupplierContracts with @(
+    UI.SelectionFields : [
+        identifier
+    ],
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
@@ -41,6 +44,52 @@ annotate service.SupplierContracts with @(
     ]
 );
 annotate service.SupplierContracts with @(
+
+    UI.HeaderInfo : {
+        $Type          : 'UI.HeaderInfoType',
+        TypeName       : 'Supplier Contract',
+        TypeNamePlural : 'Supplier Contracts',
+        Title          : {
+            $Type : 'UI.DataField',
+            Value : identifier
+        },
+        Description    : {
+            $Type : 'UI.DataField',
+            Value : description
+        }
+    },
+
+    UI.HeaderFacets : [
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.DataPoint#Date'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.DataPoint#StartDate'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.DataPoint#EndDate'
+        },
+    ],
+
+    UI.DataPoint #Date : {
+        Title : 'Contract Date',        
+        Value : date,
+        ![@UI.Emphasized],
+    },
+    UI.DataPoint #StartDate : {
+        Title : 'Contract Start Date',        
+        Value : startdate,
+        ![@UI.Emphasized],
+    },
+    UI.DataPoint #EndDate : {
+        Title : 'Contract End Date',        
+        Value : enddate,
+        ![@UI.Emphasized],
+    },
+
     UI.FieldGroup #GeneratedGroup1 : {
         $Type : 'UI.FieldGroupType',
         Data : [
@@ -231,7 +280,8 @@ annotate service.SupplierContracts with {
                     ValueListProperty: 'firstLineName'
                 }
             ]
-        }
+        },
+        Common.Text :   toSupplier.firstLineName 
     );
     statusCode @ (
         Common: {
@@ -355,6 +405,23 @@ annotate service.Items with {
             TextArrangement : #TextOnly 
         }
     );
+    productCategory @ (
+        Common.ValueList: {
+            Label: 'Product Categories',
+            CollectionPath: 'ProductCategories',
+            Parameters: [
+                { $Type: 'Common.ValueListParameterInOut',
+                    LocalDataProperty: productCategory,
+                    ValueListProperty: 'prdouctCategoryID'
+                },
+                { $Type: 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'description'
+                }
+            ]
+        },
+        Common.Text : productCategory.description,
+        Common.TextArrangement : #TextOnly 
+    )    
 }
 
 annotate service.Suppliers with {
@@ -363,6 +430,14 @@ annotate service.Suppliers with {
         Common.Text: firstLineName
     );
     firstLineName    @title: 'Supplier Name';
+}
+
+annotate service.ProductCategories with {
+    prdouctCategoryID         @(
+        title: 'ID',
+        Common.Text: productCatergory.description
+    );
+    description    @title: 'Category Name';
 }
 
 annotate service.SupplierContracts with @Capabilities.SearchRestrictions.Searchable : false;
