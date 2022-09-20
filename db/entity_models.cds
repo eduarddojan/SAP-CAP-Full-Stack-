@@ -39,9 +39,15 @@ entity Items : managed, cuid {
     description         :   String;
     productCategory     :   String;
     quantity            :   Integer;
-    //uom               :   --> create additionl entity
+    uom                 :   Association to one UnitOfMeasurement;
+
     netPrice            :   Decimal;
     netPriceCurrency    :   Association to one sap.common.Currencies;
+
+    netValue            :   Decimal;
+    netValueCurrency    :   Association to one sap.common.Currencies;
+
+    //taxCode             :    
 }
 
 // Supplier contract status codes
@@ -64,6 +70,15 @@ entity SupplierContractRenewalRuleCodes : sap.common.CodeList {
 
 // Supplier contract status codes
 entity SupplierContractCancellationAgreementCodes : sap.common.CodeList {
+        @Common.Text : {
+            $value                 : descr,
+            ![@UI.TextArrangement] : #TextOnly
+        }
+    key code : Integer default 0
+}
+
+//  UoM
+entity UnitOfMeasurement : sap.common.CodeList {
         @Common.Text : {
             $value                 : descr,
             ![@UI.TextArrangement] : #TextOnly

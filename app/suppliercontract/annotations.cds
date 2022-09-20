@@ -166,8 +166,57 @@ annotate service.SupplierContracts with @(
     ]
 );
 
-// Annotations for value help
+annotate service.Items with @(UI : {
+    LineItem : [
+        {
+            $Type             : 'UI.DataField',
+            Value             : identifer,
+            Label             : 'ID',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : description,
+            Label             : 'Description',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : productCategory,
+            Label             : 'Product Category',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : quantity,
+            Label             : 'Quantity',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : uom_code,
+            Label             : 'Unit',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : netPrice,
+            Label             : 'Net Price',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : netPriceCurrency_code,
+            Label             : 'Currency',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : netValue,
+            Label             : 'Net Value',
+        },
+        {
+            $Type             : 'UI.DataField',
+            Value             : netValueCurrency_code,
+            Label             : 'Currency',
+        },
+    ]
+});
 
+// Annotations for value help
 annotate service.SupplierContracts with {
      supplierID @(
         Common.ValueList: {
@@ -235,7 +284,7 @@ annotate service.SupplierContracts with {
             TextArrangement : #TextOnly 
         }
     );
-    currency_code @ (
+    currency @ (
         Common: {
             ValueListWithFixedValues,
             ValueList : {
@@ -248,7 +297,61 @@ annotate service.SupplierContracts with {
                 }
                 ]
             },
-            Text : currency_code.descr,
+            Text : currency.name
+        }
+    );
+}
+
+// Value help on items
+annotate service.Items with {     
+    uom @ (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'UnitOfMeasurement',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : uom_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : uom.descr,
+            TextArrangement : #TextOnly 
+        }
+    );
+    netValueCurrency @  (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'Currencies',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : netValueCurrency_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : netValueCurrency.name,
+            TextArrangement : #TextOnly 
+        }
+    );
+    netPriceCurrency @  (
+        Common: {
+            ValueListWithFixedValues,
+            ValueList : {
+                SearchSupported : true,
+                CollectionPath  : 'Currencies',
+                Parameters      : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : netPriceCurrency_code,
+                    ValueListProperty : 'code'
+                }
+                ]
+            },
+            Text : netPriceCurrency.name,
             TextArrangement : #TextOnly 
         }
     );
@@ -263,18 +366,3 @@ annotate service.Suppliers with {
 }
 
 annotate service.SupplierContracts with @Capabilities.SearchRestrictions.Searchable : false;
-
-annotate service.Items with @(UI : {
-    LineItem : [
-        {
-            $Type             : 'UI.DataField',
-            Value             : identifer,
-            Label             : 'ID',
-        },
-        {
-            $Type             : 'UI.DataField',
-            Value             : description,
-            Label             : 'Description',
-        }
-    ]
-});

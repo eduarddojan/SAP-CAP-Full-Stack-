@@ -1,5 +1,5 @@
-parent_id,identifer,description
-79ceab87-300d-4b66-8cc3-f82c679b77a1,"101","Line 1-1"
-79ceab87-300d-4b66-8cc3-f82c679b77a1,"201","Line 2-1"
-79ceab87-300d-4b66-8cc3-f82c679b77a1,"202","Line 2-2"
-79ceab87-300d-4b66-8cc3-f82c679b77a1,"203","Line 2-3"
+parent_id,identifer,description,productCategory,quantity,uom_code,netPrice,netPriceCurrency_code,netValue,netValueCurrency_code
+79ceab87-300d-4b66-8cc3-f82c679b77a1,"1","Line 1-1","102",1,0,50,EUR,50,EUR
+79ceab87-300d-4b66-8cc3-f82c679b77a1,"2","Line 2-1","102",1,0,50,EUR,50,EUR
+79ceab87-300d-4b66-8cc3-f82c679b77a1,"3","Line 2-2","102",1,0,50,EUR,50,EUR
+79ceab87-300d-4b66-8cc3-f82c679b77a1,"4","Line 2-3","102",1,0,50,EUR,50,EUR
