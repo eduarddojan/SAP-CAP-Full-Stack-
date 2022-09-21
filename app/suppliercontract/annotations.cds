@@ -488,7 +488,7 @@ annotate service.Items with {
                     ValueListProperty: 'prdouctCategoryID'
                 },
                 { $Type: 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'prdouctCategoryID'
+                    ValueListProperty: 'description'
                 }
             ]
         }
