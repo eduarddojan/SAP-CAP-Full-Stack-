@@ -2,6 +2,14 @@ _schema-version: "3.1"
 ID: supplier-contract
 description: A simple CAP project.
 version: 1.0.0
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
+        - cp -r db/data gen/srv/srv/data
+
 modules:
   - name: supplier-contract-srv
     type: nodejs

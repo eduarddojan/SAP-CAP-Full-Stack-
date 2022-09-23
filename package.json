@@ -10,12 +10,12 @@
     "@sap/cds": "^6",
     "@sap/xssec": "^3",
     "express": "^4",
-    "passport": "^0.6.0"
+    "passport": "^0.6.0",
+    "sqlite3": "^5.0.4"
   },
   "devDependencies": {
     "@sap/ux-specification": "^1.102.5",
-    "rimraf": "^3.0.2",
-    "sqlite3": "^5.0.4"
+    "rimraf": "^3.0.2"
   },
   "scripts": {
     "start": "cds run",
@@ -57,6 +57,12 @@
   ],
   "cds": {
     "requires": {
+    "db": {
+        "kind": "sqlite",
+        "credentials": {
+            "database": ":memory:"
+        }
+        },
       "approuter": {
         "kind": "cloudfoundry"
       },
@@ -80,6 +86,9 @@
             "password": "25SapDev%&"
         }
       }
+    },
+    "features": {
+        "in_memory_db": true
     }
   }
 }
