@@ -16,7 +16,6 @@ modules:
       builder: npm-ci
     requires:
       - name: supplier-contract
-      - name: supplier-contract-uaa
       - name: supplier-contract-destination-service
   
   - name: supplier-contract
@@ -32,8 +31,6 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
           strictSSL: true
-      - name: supplier-contract-uaa
-      - name: supplier-contract-destination-service
 resources:
   - name: supplier-contract-destination-service
     type: org.cloudfoundry.managed-service
@@ -42,15 +39,4 @@ resources:
       service-name: supplier-contract-destination-service
       service-plan: lite
     requires:
-      - name: srv-api
-
-  - name: supplier-contract-uaa
-    type: org.cloudfoundry.managed-service
-    parameters:
-      config:
-        tenant-mode: dedicated
-        xsappname: supplier-contract-dev
-      path: ./xs-security.json
-      service: xsuaa
-      service-name: supplier-contract-uaa
-      service-plan: application      
+      - name: srv-api     

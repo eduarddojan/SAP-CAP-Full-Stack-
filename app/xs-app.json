@@ -3,7 +3,7 @@
     "authenticationMethod": "none",
     "routes": [
       {
-        "source": "^/webapp/(.*)$",
+        "source": "^suppliercontract/webapp/(.*)$",
         "target": "$1",
         "localDir": "suppliercontract/webapp/"
       },

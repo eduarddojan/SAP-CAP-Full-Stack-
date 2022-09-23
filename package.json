@@ -57,9 +57,6 @@
   ],
   "cds": {
     "requires": {
-      "auth": {
-        "kind": "xsuaa"
-      },
       "approuter": {
         "kind": "cloudfoundry"
       },

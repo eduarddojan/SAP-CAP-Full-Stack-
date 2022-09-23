@@ -2,7 +2,11 @@ using SupplierContracts as service from '../../srv/service-models';
 
 annotate service.SupplierContracts with @(
     UI.SelectionFields : [
-        identifier
+        identifier,
+        description,
+        date,
+        startdate,
+        enddate
     ],
     UI.LineItem : [
         {
@@ -423,6 +427,21 @@ annotate service.SupplierContracts with {
             TextArrangement : #TextOnly 
         }
     );
+    identifier         @(
+        title: 'ID'
+    );
+    description         @(
+        title: 'Description'
+    );
+    date         @(
+        title: 'Date'
+    );
+    startdate         @(
+        title: 'Start Date'
+    );
+    enddate         @(
+        title: 'End Date'
+    );   
 }
 
 // Value help on items
