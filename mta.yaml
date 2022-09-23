@@ -25,6 +25,7 @@ modules:
     requires:
       - name: supplier-contract
       - name: supplier-contract-destination-service
+      - name: supplier-contract-uaa
   
   - name: supplier-contract
     type: approuter.nodejs
@@ -48,3 +49,12 @@ resources:
       service-plan: lite
     requires:
       - name: srv-api     
+  - name: supplier-contract-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        tenant-mode: dedicated
+        xsappname: supplier-contract-dev
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application 
