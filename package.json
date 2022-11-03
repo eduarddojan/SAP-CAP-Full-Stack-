@@ -72,8 +72,8 @@
         "credentials": {
           "url": "https://my338929.sapbydesign.com/sap/byd/odata/cust/v1/querysuppliers",
           "authentication": "BasicAuthentication",
-          "username": "EDU.BU",
-          "password": "25SapDev%&"
+          "username": "user",
+          "password": "pw"
         }
       },
       "byd_product_categories": {
@@ -82,8 +82,8 @@
         "credentials": {
             "url": "https://my338929.sapbydesign.com/sap/byd/odata/cust/v1/queryproductcategories",
             "authentication": "BasicAuthentication",
-            "username": "EDU.BU",
-            "password": "25SapDev%&"
+            "username": "user",
+            "password": "pw"
         }
       }
     },
