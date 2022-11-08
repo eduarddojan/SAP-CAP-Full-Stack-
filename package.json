@@ -62,7 +62,10 @@
         "credentials": {
             "database": ":memory:"
         }
-        },
+      },
+      "uaa": {
+          "kind": "xsuaa"
+      },
       "approuter": {
         "kind": "cloudfoundry"
       },
@@ -70,20 +73,16 @@
         "kind": "odata-v2",
         "model": "srv/external/byd_suppliers",
         "credentials": {
-          "url": "https://my338929.sapbydesign.com/sap/byd/odata/cust/v1/querysuppliers",
-          "authentication": "BasicAuthentication",
-          "username": "user",
-          "password": "pw"
+          "destination": "EDNC_BYD_PDI",
+          "path": "/sap/byd/odata/cust/v1/querysuppliers"
         }
       },
       "byd_product_categories": {
         "kind": "odata-v2",
         "model": "srv/external/byd_product_categories",
         "credentials": {
-            "url": "https://my338929.sapbydesign.com/sap/byd/odata/cust/v1/queryproductcategories",
-            "authentication": "BasicAuthentication",
-            "username": "user",
-            "password": "pw"
+          "destination": "EDNC_BYD_PDI",
+          "path": "/sap/byd/odata/cust/v1/queryproductcategories"
         }
       }
     },

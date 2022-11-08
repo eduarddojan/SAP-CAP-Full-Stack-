@@ -5,7 +5,16 @@ using sap from '@sap/cds/common';
 service SupplierContracts {
     
     @odata.draft.enabled
-    entity SupplierContracts as select from armodels.SupplierContracts 
+    entity SupplierContracts @(restrict : [
+        {
+            grant : ['READ'],
+            to : ['ContractViewer']
+        },
+        {
+            grant : ['*'],
+            to : ['ContractManager']
+        }
+    ]) as select from armodels.SupplierContracts 
         mixin {
             toSupplier: Association to RemoteSupplier.SupplierCollection on toSupplier.InternalID = $projection.supplierID
         }
@@ -19,7 +28,16 @@ service SupplierContracts {
     
         
 
-    entity Items as select from armodels.Items
+    entity Items @(restrict : [
+        {
+            grant : ['READ'],
+            to : ['ContractViewer']
+        },
+        {
+            grant : ['*'],
+            to : ['ContractManager']
+        }
+    ]) as select from armodels.Items
         mixin {
             toProductCategory : Association to RemoteProductCategory.ProductCategoryHierarchyProductCategoryCollection on toProductCategory.InternalID = $projection.productCategory;
         }into {
